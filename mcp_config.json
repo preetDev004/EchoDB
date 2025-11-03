@@ -1,0 +1,16 @@
+{
+    "mcpServers": {
+      "echodb": {
+        "command": "/Users/preetpatel/.local/bin/uv",
+        "args": [
+          "run",
+          "--directory",
+          "/Users/preetpatel/Documents/Code/echodb",
+          "src/main.py"
+        ],
+        "env": {
+          "DATABASE_URI": "postgresql+psycopg2://postgres.xbijhfldcyueliufsgcp:EHVa5sl50mue4jwX@aws-1-us-east-1.pooler.supabase.com:6543/postgres?sslmode=require"
+        }
+      }
+    }
+  }
