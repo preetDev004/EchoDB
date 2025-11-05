@@ -1,0 +1,2 @@
+"""EchoDB MCP server package."""
+
