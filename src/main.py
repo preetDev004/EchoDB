@@ -1,4 +1,5 @@
 """Main entry point for EchoDB MCP server."""
+
 import logging
 import os
 import sys
@@ -23,7 +24,7 @@ logger = logging.getLogger("echodb")
 
 mcp = FastMCP("echodb", instructions=FORMATTING_INSTRUCTIONS)
 
-# Register all MCP tools
+# Register all MCP tools with clear descriptions
 mcp.tool()(connect_database.connect_database)
 mcp.tool()(get_schema.get_schema)
 mcp.tool()(execute_query.execute_query)
@@ -44,7 +45,7 @@ def main(transport: str = "stdio") -> None:
             logger.info("Connected using DATABASE_URI from environment.")
         except Exception as exc:
             logger.warning("Failed to preconnect using DATABASE_URI: %s", exc)
-    
+
     logger.info(f"Running MCP server... using {transport} transport")
     mcp.run(transport=transport)
 

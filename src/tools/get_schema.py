@@ -7,7 +7,9 @@ from src.utils.db import ensure_engine
 
 
 def get_schema() -> Dict[str, Any]:
-    """Return database schema: tables, columns, primary keys, foreign keys, indexes."""
+    """
+    Use this tool to get the database schema: tables, columns, primary keys, foreign keys, indexes.
+    """
     engine = ensure_engine()
     inspector = inspect(engine)
     schema: Dict[str, Any] = {"tables": []}

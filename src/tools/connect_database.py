@@ -6,7 +6,7 @@ from src.utils.db import ensure_engine
 
 def connect_database() -> Dict[str, Any]:
     """
-    Connect to a database using the provided SQLAlchemy URI.
+    Use this tool to connect to the database.
     """
     engine = ensure_engine()
     # Test connection

@@ -7,7 +7,12 @@ from src.utils.db import ensure_engine, rows_to_dicts
 
 
 def get_table_sample(table_name: str, limit: int = 10) -> Dict[str, Any]:
-    """Return up to `limit` rows from the specified table."""
+    """
+    Get a sample of up to `limit` rows from the specified table.
+    
+    Returns: {"rows": [...]} - Array of row objects with column names as keys.
+    Results should be displayed as a markdown table.
+    """
     engine = ensure_engine()
     inspector = inspect(engine)
     valid_tables = set(inspector.get_table_names())
