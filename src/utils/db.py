@@ -30,10 +30,19 @@ def ensure_engine() -> Engine:
         raise RuntimeError(
             "DATABASE_URI not set. Set it in the client config or call connect_database."
         )
-    engine = create_engine(env_uri)
-    state["engine"] = engine
-    state["db_uri"] = env_uri
-    return engine
+    try:
+        engine = create_engine(env_uri)
+        # Test the connection
+        with engine.connect() as conn:
+            conn.exec_driver_sql("SELECT 1")
+        state["engine"] = engine
+        state["db_uri"] = env_uri
+        return engine
+    except Exception as exc:
+        raise RuntimeError(
+            f"Failed to connect using DATABASE_URI from environment: {exc}. "
+            "Please check your connection string or use connect_database tool with a valid URI."
+        ) from exc
 
 
 def is_select_only(sql: str) -> bool:
