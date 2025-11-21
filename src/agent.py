@@ -135,7 +135,10 @@ class Agent:
                 # Agent finished a step
                 message = step["agent"]["messages"][0]
                 if message.content:
-                    yield {"type": "content", "content": message.content}
+                    content = message.content
+                    if isinstance(content, list):
+                        content = "".join(str(part) for part in content)
+                    yield {"type": "content", "content": content}
                 
                 if message.tool_calls:
                     for tc in message.tool_calls:
