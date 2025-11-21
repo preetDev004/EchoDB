@@ -7,8 +7,12 @@ from src.utils.db import ensure_engine, is_select_only, rows_to_dicts
 
 
 def execute_query(sql: str) -> Dict[str, Any]:
-    """Execute a read-only SELECT SQL query and return rows as JSON.
-
+    """
+    Execute a read-only SELECT SQL query and return results.
+    
+    Returns: {"rows": [...]} - Array of row objects with column names as keys.
+    Results should be displayed as a markdown table.
+    
     Security: Only SELECT statements are allowed. Multiple statements are rejected.
     """
     if not is_select_only(sql):

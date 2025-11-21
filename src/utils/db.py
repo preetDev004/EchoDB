@@ -3,7 +3,7 @@ import os
 import re
 from typing import Any, Dict, List
 
-from sqlalchemy import create_engine as sa_create_engine, inspect, text
+from sqlalchemy import create_engine as sa_create_engine
 from sqlalchemy.engine import Engine, Result
 
 
@@ -22,7 +22,7 @@ def create_engine(db_uri: str) -> Engine:
 
 def ensure_engine() -> Engine:
     """Ensure a database engine is available, creating one if needed."""
-    engine: Engine | None = state.get("engine")
+    engine: Engine | None = get_state().get("engine")
     if engine is not None:
         return engine
     env_uri = os.getenv("DATABASE_URI")
@@ -31,8 +31,7 @@ def ensure_engine() -> Engine:
             "DATABASE_URI not set. Set it in the client config or call connect_database."
         )
     engine = create_engine(env_uri)
-    state["engine"] = engine
-    state["db_uri"] = env_uri
+    set_engine(engine, env_uri)
     return engine
 
 
